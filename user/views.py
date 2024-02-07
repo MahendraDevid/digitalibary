@@ -1,9 +1,10 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .forms import RegistrationForm
+from django.contrib.auth.models import Group
 
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'  
@@ -11,7 +12,7 @@ class CustomLoginView(LoginView):
     def get_success_url(self):
         user = self.request.user
         if user.is_authenticated:
-            if user.groups.filter(name='Administrator').exists():
+            if user.groups.filter(name='Admin').exists():
                 return reverse('admin_dashboard')  # Ganti 'admin_dashboard' dengan nama URL untuk dashboard administrator
             elif user.groups.filter(name='Petugas').exists():
                 return reverse('petugas_dashboard')  # Ganti 'staff_dashboard' dengan nama URL untuk dashboard petugas
@@ -38,8 +39,11 @@ def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('user:login')  # Ganti 'login' dengan nama URL untuk halaman login
+            user = form.save()
+            # Set default role to 'Administrator' for newly registered user
+            admin_group = Group.objects.get(name='Admin')
+            user.groups.add(admin_group)
+            return redirect('login')  # Ganti 'login' dengan nama URL untuk halaman login
     else:
         form = RegistrationForm()
     return render(request, 'registration/register.html', {'form': form})
