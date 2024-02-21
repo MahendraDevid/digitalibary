@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .forms import RegistrationForm
 from django.contrib.auth.models import Group
+from user.models import User
 
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'  
@@ -47,3 +48,8 @@ def register(request):
     else:
         form = RegistrationForm()
     return render(request, 'registration/register.html', {'form': form})
+
+@login_required
+def user_list(request):
+    users = User.objects.all()
+    return render(request, 'registration/user_list.html', {'users': users})

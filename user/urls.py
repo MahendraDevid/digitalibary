@@ -11,5 +11,8 @@ urlpatterns = [
     path('admin-dashboard/', views.admin_dashboard, name='admin_dashboard'),
     path('petugas-dashboard/', views.petugas_dashboard, name='petugas_dashboard'),
     path('peminjam-dashboard/', views.peminjam_dashboard, name='peminjam_dashboard'),
+    
+    # path untuk user
+    path('list/', views.user_list, name='user_list'),
 ]
 
