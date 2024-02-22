@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Buku</title>
+</head>
+<body>
+    <h1>Daftar Buku</h1>
+    <ul>
+        {% for buku in bukus %}
+            <li>{{ buku.judul }} - {{ buku.penulis }} - {{ buku.penerbit }} - {{ buku.tahunterbit }}
+                {% if user_can_change_buku %}
+                    <a href="{% url 'ubah_buku' buku.pk %}">Ubah</a>
+                {% endif %}
+                {% if user_can_delete_buku %}
+                    <a href="{% url 'hapus_buku' buku.pk %}">Hapus</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    {% if user_can_add_buku %}
+        <a href="{% url 'tambah_buku' %}">Tambah Buku</a>
+    {% endif %}
+</body>
+</html>

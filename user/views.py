@@ -13,28 +13,28 @@ class CustomLoginView(LoginView):
     def get_success_url(self):
         user = self.request.user
         if user.is_authenticated:
-            if user.groups.filter(name='Admin').exists():
-                return reverse('admin_dashboard')  # Ganti 'admin_dashboard' dengan nama URL untuk dashboard administrator
-            elif user.groups.filter(name='Petugas').exists():
+            if user.groups.filter(name='Petugas').exists():
                 return reverse('petugas_dashboard')  # Ganti 'staff_dashboard' dengan nama URL untuk dashboard petugas
             elif user.groups.filter(name='Peminjam').exists():
                 return reverse('peminjam_dashboard')  # Ganti 'borrower_dashboard' dengan nama URL untuk dashboard peminjam
+            elif user.groups.filter(name='Admin').exists():
+                return reverse('admin_dashboard')  # Ganti 'admin_dashboard' dengan nama URL untuk dashboard administrator
         return super().get_success_url()
 
 @login_required
 def admin_dashboard(request):
     # Logika tampilan dashboard administrator
-    return render(request, 'admin_dashboard.html')
+    return render(request, 'dashboard/admin_dashboard.html')
 
 @login_required
 def petugas_dashboard(request):
     # Logika tampilan dashboard petugas
-    return render(request, 'petugas_dashboard.html')
+    return render(request, 'dashboard/petugas_dashboard.html')
 
 @login_required
 def peminjam_dashboard(request):
     # Logika tampilan dashboard peminjam
-    return render(request, 'peminjam_dashboard.html')
+    return render(request, 'dashboard/peminjam_dashboard.html')
 
 def register(request):
     if request.method == 'POST':
