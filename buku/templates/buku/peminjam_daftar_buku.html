@@ -16,7 +16,6 @@
                 <th>Penulis</th>
                 <th>Penerbit</th>
                 <th>Tahun Terbit</th>
-                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -28,14 +27,9 @@
                 <td>{{ buku.penulis }}</td>
                 <td>{{ buku.penerbit }}</td>
                 <td>{{ buku.tahunterbit }}</td>
-                <td>
-                    <a href="{% url 'ubah_buku' buku.pk %}">Ubah</a>
-                    <a href="{% url 'hapus_buku' buku.pk %}">Hapus</a>
-                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <a href="{% url 'tambah_buku' %}">Tambah Buku</a>
 </body>
 </html>

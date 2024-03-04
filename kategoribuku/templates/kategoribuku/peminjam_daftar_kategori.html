@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Kategori Buku</title>
+</head>
+<body>
+    <h1>Daftar Kategori Buku</h1>
+    <ul>
+        {% for kategori in kategoris %}
+            <li>{{ kategori.kategoriid }} - {{ kategori.namakategori }}
+                <form action="{% url 'Kategoribuku:lihat_buku_per_kategori' kategori.kategoriid %}" method="GET">
+                    <button type="submit">Lihat Buku</button>
+                </form>                
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

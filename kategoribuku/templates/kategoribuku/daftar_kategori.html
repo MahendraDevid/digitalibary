@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Kategori Buku</title>
+</head>
+<body>
+    <h1>Daftar Kategori Buku</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID Kategori</th>
+                <th>Nama Kategori</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for kategori in kategoris %}
+            <tr>
+                <td>{{ kategori.kategoriid }}</td>
+                <td>{{ kategori.namakategori }}</td>
+                <td>
+                    <a href="{% url 'Kategoribuku:update' kategori.kategoriid %}">Update</a>
+                    <form action="{% url 'Kategoribuku:delete' kategori.kategoriid %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'Kategoribuku:create' %}">Tambah Kategori Buku</a>
+</body>
+</html>

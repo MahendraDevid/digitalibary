@@ -8,3 +8,6 @@ class Kategoribuku(models.Model):
     class Meta:
         managed = False
         db_table = 'kategoribuku'
+        
+    def __str__(self):
+        return self.namakategori
