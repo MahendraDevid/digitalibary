@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Laporan Peminjaman</title>
+</head>
+<body>
+    <h1>Laporan Peminjaman</h1>
+    <p>ID Peminjaman: {{ peminjaman.peminjamanid }}</p>
+    <p>User: {{ peminjaman.userid }}</p>
+    <p>Buku: {{ peminjaman.bukuid.judul }}</p>
+    <p>Tanggal Pinjam: {{ peminjaman.tanggalpeminjaman }}</p>
+    <p>Tanggal Kembali: {{ peminjaman.tanggalpengembalian }}</p>
+    <p>Status: {{ peminjaman.statuspeminjaman }}</p>
+    <!-- Tambahkan informasi lain yang diperlukan -->
+</body>
+</html>

@@ -1,0 +1,16 @@
+peminjaman_form.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Peminjaman</title>
+</head>
+<body>
+    <h2>Form Peminjaman</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p>Selected Book: {{ buku.judul }}</p>
+        <button type="submit">Simpan</button>
+    </form>
+</body>
+</html>

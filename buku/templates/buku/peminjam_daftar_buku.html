@@ -16,6 +16,7 @@
                 <th>Penulis</th>
                 <th>Penerbit</th>
                 <th>Tahun Terbit</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +28,9 @@
                 <td>{{ buku.penulis }}</td>
                 <td>{{ buku.penerbit }}</td>
                 <td>{{ buku.tahunterbit }}</td>
+                <td class="">
+                    <a href="{% url 'Peminjaman:create' buku.pk %}" class="btn btn-primary">Pilih buku</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

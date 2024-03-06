@@ -22,5 +22,6 @@ urlpatterns = [
     path('user/', include('user.urls')),
     path('buku/', include('buku.urls')),
     path('kategoribuku/', include('kategoribuku.urls')),
+    path('peminjaman/', include('peminjaman.urls')),
     
 ]

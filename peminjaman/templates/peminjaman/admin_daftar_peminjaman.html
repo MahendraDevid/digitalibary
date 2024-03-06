@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Peminjaman</title>
+</head>
+<body>
+    <h2>Daftar Peminjaman</h2>
+    <table>
+        <tr>
+            <th>ID Peminjaman</th>
+            <th>Nama Peminjam</th>
+            <th>Buku</th>
+            <th>Tanggal Pinjam</th>
+            <th>Tanggal Kembali</th>
+            <th>Status</th>
+            <th>Aksi</th>
+        </tr>
+        {% for pinjam in pinjams %}
+        <tr>
+            <td>{{ pinjam.peminjamanid }}</td>
+            <td>{{ pinjam.userid }}</td>
+            <td>{{ pinjam.bukuid }}</td>
+            <td>{{ pinjam.tanggalpeminjaman }}</td>
+            <td>{{ pinjam.tanggalpengembalian }}</td>
+            <td>{{ pinjam.statuspeminjaman }}</td>
+            <td>
+                <a href="{% url 'Peminjaman:update' pinjam.peminjamanid %}">Ubah</a>
+                <a href="{% url 'Peminjaman:delete' pinjam.peminjamanid %}">Hapus</a>
+                <a href="{% url 'Peminjaman:generate_laporan_peminjaman' pinjam.peminjamanid %}">Generate Laporan</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
