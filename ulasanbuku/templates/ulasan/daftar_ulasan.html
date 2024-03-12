@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Ulasan Buku</title>
+</head>
+<body>
+    <h1>Daftar Ulasan Buku</h1>
+    <ul>
+        {% for ulasan in ulasan %}
+            <li>
+                {{ ulasan.ulasan }}
+                {{ ulasan.rating }}
+                <form action="{% url 'ulasanbuku:update' ulasan.pk %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit">Update</button>
+                </form>
+                <form action="{% url 'ulasanbuku:delete' ulasan.pk %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

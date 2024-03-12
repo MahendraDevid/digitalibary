@@ -36,7 +36,9 @@ def update_Peminjaman(request, peminjamanid):
             return redirect('Peminjaman:read')
     else:
         form = PeminjamanForm(instance=peminjaman)
-        form.fields['peminjamanid'].widget = HiddenInput()
+        # Periksa apakah bidang 'peminjamanid' ada dalam form
+        if 'peminjamanid' in form.fields:
+            form.fields['peminjamanid'].widget = HiddenInput()
 
     return render(request, 'peminjaman/admin_peminjaman_form.html', {'form': form})
 

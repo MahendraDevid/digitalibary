@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Form Peminjaman</title>
+    <title>Daftar Peminjaman</title>
 </head>
 <body>
     <h2>Daftar Peminjaman</h2>
@@ -25,6 +25,9 @@
             <td>{{ pinjam.statuspeminjaman }}</td>
             <td>
                 <a href="{% url 'Peminjaman:delete' pinjam.peminjamanid %}">Hapus</a>
+                {% if pinjam.statuspeminjaman == "Dipinjam" %}
+                <a href="{% url 'ulasanbuku:create' pinjam.bukuid.pk %}" class="btn btn-success">Ulasan Buku</a>
+                {% endif %}
             </td>
         </tr>
         {% endfor %}

@@ -30,6 +30,12 @@
                 <td>{{ buku.tahunterbit }}</td>
                 <td class="">
                     <a href="{% url 'Peminjaman:create' buku.pk %}" class="btn btn-primary">Pilih buku</a>
+                    <form action="{% url 'koleksipribadi:create' buku.pk %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="bukuid" value="{{ buku.id }}">
+                        <button type="submit">Tambah ke koleksi</button>
+                    </form>
+                    <a href="{% url 'ulasanbuku:view' buku.pk %}" class="btn btn-success">Lihat Ulasan</a>
                 </td>
             </tr>
             {% endfor %}

@@ -6,9 +6,10 @@ from django.urls import reverse
 from .forms import RegistrationForm
 from django.contrib.auth.models import Group
 from user.models import User
+from django.contrib.auth import logout
 
 class CustomLoginView(LoginView):
-    template_name = 'registration/login.html'  
+    template_name = 'accounts/login.html'  
 
     def get_success_url(self):
         user = self.request.user
@@ -48,6 +49,11 @@ def register(request):
     else:
         form = RegistrationForm()
     return render(request, 'registration/register.html', {'form': form})
+
+# Fungsi untuk logout
+def user_logout(request):
+    logout(request)
+    return redirect('login')  # Ganti 'login' dengan nama URL untuk halaman login jika diperlukan
 
 @login_required
 def user_list(request):

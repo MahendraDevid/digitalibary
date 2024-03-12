@@ -11,6 +11,6 @@ urlpatterns = [
     path('delete/<str:peminjamanid>/', views.delete_Peminjaman, name='delete'),
 
     # Admin roles
-    path('admin-petugas/list/', views.admin_peminjaman_list, name='admin-pinjam-read'),
+    path('admin-petugas/list/', views.admin_peminjaman_list, name='admin-read'),
     path('laporan/<int:peminjaman_id>/', views.generate_laporan_peminjaman, name='generate_laporan_peminjaman'),
 ]
