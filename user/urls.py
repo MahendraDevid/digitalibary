@@ -1,13 +1,15 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path
-from django.contrib.auth.views import LogoutView
 from . import views
 
 urlpatterns = [
     # Path untuk login dan register
-    path('login/', views.CustomLoginView.as_view(), name='login'),
+    path('login/', views.Login.as_view(), name='login'),
+    path('admin/login/', views.LoginAdmin.as_view(), name='login_admin'),
+    path('petugas/login/', views.LoginPetugas.as_view(), name='login_petugas'),
+    path('admin/register/', views.register_admin, name='register_admin'),
     path('register/', views.register, name='register'),
-    path('logout/', LogoutView.as_view(), name='logout'),
+    path('logout/', views.user_logout, name='logout'),
     
     # Path untuk dashboard
     path('admin-dashboard/', views.admin_dashboard, name='admin_dashboard'),

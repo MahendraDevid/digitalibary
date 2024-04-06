@@ -7,7 +7,7 @@ class Ulasanbuku(models.Model):
     userid = models.ForeignKey(User, on_delete=models.CASCADE, db_column='UserID', default=1)
     bukuid = models.ForeignKey(Buku, on_delete=models.CASCADE, db_column='BukuID', default=1)
     ulasan = models.TextField(db_column='Ulasan')
-    rating = models.IntegerField(db_column='Rating')
+    rating = models.IntegerField(choices=[(i, i) for i in range(1, 11)], db_column='Rating')
 
     class Meta:
         db_table = 'ulasanbuku'

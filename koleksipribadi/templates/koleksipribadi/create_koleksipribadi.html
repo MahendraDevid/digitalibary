@@ -3,14 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Koleksi Pribadi</title>
+    <title>Form Koleksi Pribadi</title>
+    <!-- Load Bootstrap CSS jika diperlukan -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"> 
+    <style>
+        .form-group {
+            margin-bottom: 20px;
+         }
+        .form-control {
+            width: 100%;
+        }
+         .btn {
+            margin-top: 10px;
+         }
+
+    </style>
 </head>
 <body>
-    <h1>Tambah Koleksi Pribadi</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Simpan</button>
-    </form>
+    <div class="container">
+        <h1>Form Koleksi Pribadi</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="bukuid">Judul Buku:</label>
+                <input type="text" class="form-control" id="bukuid_display" value="{{ buku.judul }}" readonly>
+            </div>             
+            <!-- Tombol submit -->
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 </body>
 </html>

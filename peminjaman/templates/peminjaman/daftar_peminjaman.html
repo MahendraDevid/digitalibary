@@ -1,36 +1,83 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Daftar Peminjaman</title>
-</head>
-<body>
-    <h2>Daftar Peminjaman</h2>
-    <table>
-        <tr>
-            <th>ID Peminjaman</th>
-            <th>Nama Peminjam</th>
-            <th>Buku</th>
-            <th>Tanggal Pinjam</th>
-            <th>Tanggal Kembali</th>
-            <th>Status</th>
-            <th>Aksi</th>
-        </tr>
-        {% for pinjam in pinjams %}
-        <tr>
-            <td>{{ pinjam.peminjamanid }}</td>
-            <td>{{ pinjam.userid }}</td>
-            <td>{{ pinjam.bukuid }}</td>
-            <td>{{ pinjam.tanggalpeminjaman }}</td>
-            <td>{{ pinjam.tanggalpengembalian }}</td>
-            <td>{{ pinjam.statuspeminjaman }}</td>
-            <td>
-                <a href="{% url 'Peminjaman:delete' pinjam.peminjamanid %}">Hapus</a>
-                {% if pinjam.statuspeminjaman == "Dipinjam" %}
-                <a href="{% url 'ulasanbuku:create' pinjam.bukuid.pk %}" class="btn btn-success">Ulasan Buku</a>
-                {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-</body>
-</html>
+{% extends 'layouts/base-peminjam.html' %}
+
+{% block title %} Tables {% endblock title %}
+
+{% block content %}
+
+  <div class="header bg-primary pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <h6 class="h2 text-white d-inline-block mb-0">Tables</h6>
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+              <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                <li class="breadcrumb-item"><a href="#">Peminjaman</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Daftar</li>
+              </ol>
+            </nav>
+          </div>
+          <div class="col-lg-6 col-5 text-right">
+            <a href="#" class="btn btn-sm btn-neutral">New</a>
+            <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Page content -->
+  <div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <!-- Card header -->
+                <div class="card-header border-0">
+                    <h3 class="mb-0">Daftar Peminjaman</h3>
+                </div>
+                <!-- Light table -->
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">ID Peminjaman</th>
+                                <th scope="col">Nama Peminjam</th>
+                                <th scope="col">Buku</th>
+                                <th scope="col">Tanggal Pinjam</th>
+                                <th scope="col">Tanggal Kembali</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list">
+                            {% for pinjam in pinjams %}
+                            <tr>
+                                <td>{{ pinjam.peminjamanid }}</td>
+                                <td>{{ pinjam.userid }}</td>
+                                <td>{{ pinjam.bukuid.judul }}</td>
+                                <td>{{ pinjam.tanggalpeminjaman }}</td>
+                                <td>{{ pinjam.tanggalpengembalian }}</td>
+                                <td>{{ pinjam.statuspeminjaman }}</td>
+                                <td>
+                                    {% if pinjam.statuspeminjaman == "Dipinjam" %}
+                                    <a href="{% url 'ulasanbuku:create' pinjam.bukuid.pk %}" class="ni ni-send text-green" title="Ulasan Buku"></a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}

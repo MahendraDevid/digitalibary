@@ -1,0 +1,93 @@
+{% extends 'layouts/base-fullscreen.html' %}
+
+{% block title %} Register {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+  <!-- Page content -->
+  <div class="container mt--8 pb-5">
+    <!-- Table -->
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card bg-secondary border-0">
+                <div class="card-header bg-transparent pb-5">
+                    <div class="card-body px-lg-5 py-lg-5">
+                        <h2 class="text-center text-black mb-5">
+                            Sign Up
+                        </h2>
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ form.non_field_errors }}
+                            <div class="form-group">
+                                {{ form.username.label_tag }}
+                                {{ form.username }}
+                                {{ form.username.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.email.label_tag }}
+                                {{ form.email }}
+                                {{ form.email.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.password1.label_tag }}
+                                {{ form.password1 }}
+                                {{ form.password1.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.password2.label_tag }}
+                                {{ form.password2 }}
+                                {{ form.password2.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.namalengkap.label_tag }}
+                                {{ form.namalengkap }}
+                                {{ form.namalengkap.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.alamat.label_tag }}
+                                {{ form.alamat }}
+                                {{ form.alamat.errors }}
+                            </div>
+                            {% if form.role %}
+                            <div class="form-group" style="display: none;">  <!-- Hidden field for role -->
+                                {{ form.role.label_tag }}
+                                {{ form.role }}
+                                {{ form.role.errors }}
+                            </div>
+                            {% endif %}
+                            <div class="row my-4">
+                                <div class="col-12">
+                                    <div class="custom-control custom-control-alternative custom-checkbox">
+                                        <input class="custom-control-input" id="customCheckRegister" type="checkbox">
+                                        <label class="custom-control-label" for="customCheckRegister">
+                                            <span class="text-muted">I agree with the <a href="#!">Privacy Policy</a></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary mt-4">Create account</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-6">
+                    <a href="{% url 'login' %}" class="text-light"><small>Kembali</small></a>
+                </div>
+                <div class="col-6 text-right">
+                    <a href="{% url 'login' %}" class="text-light"><small>Login</small></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}

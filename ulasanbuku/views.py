@@ -4,6 +4,7 @@ from .models import Ulasanbuku
 from buku.models import Buku
 from .forms import UlasanBukuForm
 
+# FItur Peminjam
 @login_required
 def create_ulasan(request, bukuid):
     buku = get_object_or_404(Buku, pk=bukuid)
@@ -30,8 +31,7 @@ def ulasan_list(request):
     ulasan = Ulasanbuku.objects.filter(userid=request.user)
     return render(request, 'ulasan/daftar_ulasan.html', {'ulasan': ulasan})
 
-@login_required
-def update_ulasan(request, ulasanid):
+def update_ulasan_peminjam(request, ulasanid):
     ulasan = get_object_or_404(Ulasanbuku, pk=ulasanid)
     if request.method == 'POST':
         form = UlasanBukuForm(request.POST, instance=ulasan)
@@ -40,12 +40,44 @@ def update_ulasan(request, ulasanid):
             return redirect('ulasanbuku:list')
     else:
         form = UlasanBukuForm(instance=ulasan)
-    return render(request, 'ulasan/ulasan_form.html', {'form': form})
+    return render(request, 'ulasan/admin_ulasan_form.html', {'form': form})
 
-@login_required
-def delete_ulasan(request, ulasanid):
+def delete_ulasan_peminjam(request, ulasanid):
+    ulasan = get_object_or_404(Ulasanbuku, pk=ulasanid)
+    ulasan.delete()
+    return redirect('ulasanbuku:list')
+
+# Menampilkan total data
+def total_ulasan_per_user(request):
+    if request.user.is_authenticated:
+        total = Ulasanbuku.objects.filter(userid=request.user).count()
+        return total
+    else:
+        return 0
+
+# Fitur Admin
+def ulasan_admin_list(request):
+    ulasan = Ulasanbuku.objects.all()
+    return render(request, 'ulasan/admin_daftar_ulasan.html', {'ulasan': ulasan})
+
+def update_ulasan(request, ulasanid):
     ulasan = get_object_or_404(Ulasanbuku, pk=ulasanid)
     if request.method == 'POST':
-        ulasan.delete()
-        return redirect('ulasanbuku:list')
-    return redirect('ulasanbuku:list')
+        form = UlasanBukuForm(request.POST, instance=ulasan)
+        if form.is_valid():
+            form.save()
+            return redirect('ulasanbuku:list-admin')
+    else:
+        form = UlasanBukuForm(instance=ulasan)
+    return render(request, 'ulasan/admin_ulasan_form.html', {'form': form})
+
+def delete_ulasan(request, ulasanid):
+    ulasan = get_object_or_404(Ulasanbuku, pk=ulasanid)
+    ulasan.delete()
+    return redirect('ulasanbuku:list-admin')
+
+# Menampilkan total data admin dan petugas
+def total_data_ulasan():
+    total = Ulasanbuku.objects.all().count()
+    return total  # Mengembalikan total tanpa menggunakan dictionary
+

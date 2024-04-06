@@ -18,7 +18,7 @@
   <link rel="canonical" href="https://appseed.us/admin-dashboards/django-dashboard-argon">
   
   <title>
-    Django Argon Dashboard - {% block title %} Open-Source Admin Panel {% endblock %} | AppSeed
+    Perpustakaan Digital - {% block title %} Open-Source Admin Panel {% endblock %} | SmkMerdekaBdg
   </title>
 
   <link rel="icon" href="/static/assets/img/brand/favicon.png" type="image/png">
@@ -48,12 +48,10 @@
           <div class="row justify-content-center">
             <div class="col-lg-5 col-md-6">
               <h1 class="text-white">
-                <a target="_blank" class="text-white"
-                   href="https://appseed.us/admin-dashboards/django-dashboard-argon">Django Argon</a>
+                <a target="_blank" class="text-white" href="{% url 'register' %}">Perpustakaan Digital</a>
               </h1>
               <p class="text-lead text-light">
-                Open-Source Flask Starter with Argon Design 
-                Coded by <a target="_blank" class="text-white" href="https://appseed.us">AppSeed</a>.  
+                Smk Merdeka Bandung
               </p>
             </div>
           </div>
@@ -67,8 +65,6 @@
     </div>
     
     {% block content %}{% endblock content %}
-
-    {% include "includes/footer-fullscreen.html" %}
 
   </div>
     

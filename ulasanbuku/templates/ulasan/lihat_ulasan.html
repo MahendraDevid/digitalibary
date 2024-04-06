@@ -1,20 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ulasan Buku</title>
-</head>
-<body>
-    <h1>Ulasan Buku</h1>
-    <ul>
-        {% for ulasan in ulasan %}
-            <li>
-                <strong>{{ ulasan.userid.username }}</strong>:
-                {{ ulasan.ulasan }}
-                {{ ulasan.rating }}
-            </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends 'layouts/base-peminjam.html' %}
+
+{% block title %} Tables {% endblock title %}
+
+{% block content %}
+
+  <div class="header bg-primary pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <h6 class="h2 text-white d-inline-block mb-0">Tables</h6>
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+              <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                <li class="breadcrumb-item"><a href="#">Kategori</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Daftar</li>
+              </ol>
+            </nav>
+          </div>
+          <div class="col-lg-6 col-5 text-right">
+            <a href="#" class="btn btn-sm btn-neutral">New</a>
+            <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Page content -->
+  <div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col-lg-12">
+            <ul class="list-group">
+                {% for ulasan in ulasan %}
+                <li class="list-group-item mb-3">
+                    <h5 class="mb-1">Judul Buku: {{ ulasan.bukuid.judul }}</h5>
+                    <p class="mb-1">No. {{ ulasan.pk }}</p>
+                    <p class="mb-1"><strong>{{ ulasan.userid.username }}</strong>: {{ ulasan.ulasan }}</p>
+                    <p class="mb-1">Rating: {{ ulasan.rating }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <a href="{% url 'buku:list_peminjam' %}" class="btn btn-primary">
+      <i class="fas fa-arrow-left"></i> Kembali
+    </a>
+</div>
+</div>
+
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}

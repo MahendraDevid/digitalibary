@@ -1,17 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laporan Peminjaman</title>
+    <!-- Argon CSS -->
+    <link type="text/css" href="https://cdn.jsdelivr.net/npm/argon-dashboard@1.1.0/assets/css/argon.min.css" rel="stylesheet">
+    <!-- Font Awesome icons -->
+    <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
-    <h1>Laporan Peminjaman</h1>
-    <p>ID Peminjaman: {{ peminjaman.peminjamanid }}</p>
-    <p>User: {{ peminjaman.userid }}</p>
-    <p>Buku: {{ peminjaman.bukuid.judul }}</p>
-    <p>Tanggal Pinjam: {{ peminjaman.tanggalpeminjaman }}</p>
-    <p>Tanggal Kembali: {{ peminjaman.tanggalpengembalian }}</p>
-    <p>Status: {{ peminjaman.statuspeminjaman }}</p>
-    <!-- Tambahkan informasi lain yang diperlukan -->
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h1 class="card-title">Laporan Peminjaman</h1>
+                        <hr>
+                        <p><strong>ID Peminjaman:</strong> {{ peminjaman.peminjamanid }}</p>
+                        <p><strong>User:</strong> {{ peminjaman.userid }}</p>
+                        <p><strong>Buku:</strong> {{ peminjaman.bukuid.judul }}</p>
+                        <p><strong>Tanggal Pinjam:</strong> {{ peminjaman.tanggalpeminjaman }}</p>
+                        <p><strong>Tanggal Kembali:</strong> {{ peminjaman.tanggalpengembalian }}</p>
+                        <p><strong>Status:</strong> {{ peminjaman.statuspeminjaman }}</p>
+                        <!-- Tambahkan informasi lain yang diperlukan -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

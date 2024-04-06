@@ -1,45 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Buku</title>
-</head>
-<body>
-    <h1>Daftar Buku</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Kategori Buku</th>
-                <th>ID Buku</th>
-                <th>Judul</th>
-                <th>Penulis</th>
-                <th>Penerbit</th>
-                <th>Tahun Terbit</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for buku in bukus %}
-            <tr>
-                <td>{{ buku.kategoriid }}</td>
-                <td>{{ buku.bukuid }}</td>
-                <td>{{ buku.judul }}</td>
-                <td>{{ buku.penulis }}</td>
-                <td>{{ buku.penerbit }}</td>
-                <td>{{ buku.tahunterbit }}</td>
-                <td class="">
-                    <a href="{% url 'Peminjaman:create' buku.pk %}" class="btn btn-primary">Pilih buku</a>
-                    <form action="{% url 'koleksipribadi:create' buku.pk %}" method="post">
-                        {% csrf_token %}
-                        <input type="hidden" name="bukuid" value="{{ buku.id }}">
-                        <button type="submit">Tambah ke koleksi</button>
-                    </form>
-                    <a href="{% url 'ulasanbuku:view' buku.pk %}" class="btn btn-success">Lihat Ulasan</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</body>
-</html>
+{% extends 'layouts/base-peminjam.html' %}
+
+{% block title %} Tables {% endblock title %}
+
+{% block content %}
+
+  <div class="header bg-primary pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <h6 class="h2 text-white d-inline-block mb-0">Tables</h6>
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+              <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                <li class="breadcrumb-item"><a href="#">Buku</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Daftar</li>
+              </ol>
+            </nav>
+          </div>
+          <div class="col-lg-6 col-5 text-right">
+            <a href="#" class="btn btn-sm btn-neutral">New</a>
+            <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Page content -->
+  <div class="container-fluid mt--6">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <!-- Card header -->
+          <div class="card-header border-0">
+            <h3 class="mb-0">Daftar Buku</h3>
+          </div>
+        <!-- Light table -->
+        <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col" class="sort" data-sort="name">Kategori Buku</th>
+                        <th scope="col" class="sort" data-sort="budget">Buku ID</th>
+                        <th scope="col" class="sort" data-sort="status">Judul</th>
+                        <th scope="col">Penulis</th>
+                        <th scope="col" class="sort" data-sort="completion">Penerbit</th>
+                        <th scope="col">Tahun Terbit</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="list">
+                    {% for buku in bukus %}
+                    <tr>
+                        <td>{{ buku.kategoriid }}</td>
+                        <td>{{ buku.bukuid }}</td>
+                        <td>{{ buku.judul }}</td>
+                        <td>{{ buku.penulis }}</td>
+                        <td>{{ buku.penerbit }}</td>
+                        <td>{{ buku.total_buku }}</td>
+                        <td>
+                            <a href="{% url 'Peminjaman:create' buku.pk %}" class="ni ni-archive-2 text-orange" title="Pinjam Buku" style="margin-right: 5px;"></a>
+                            <a href="{% url 'koleksipribadi:create' buku.pk %}" class="ni ni-folder-17 text-red" title="Tambah ke Koleksi" style="margin-right: 5px;"></a>
+                            <a href="{% url 'ulasanbuku:view' buku.pk %}" class="ni ni-send text-green" title="Lihat Ulasan"></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+  </div>
+  
+  {% if kategori %}
+  <a href="{% url 'Kategoribuku:kategori-read' %}" class="btn btn-primary">
+    <i class="fas fa-arrow-left"></i> Kembali
+  </a>
+  {% endif %}
+
+  
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}

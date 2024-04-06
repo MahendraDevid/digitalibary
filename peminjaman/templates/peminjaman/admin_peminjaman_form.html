@@ -2,13 +2,55 @@
 <html>
 <head>
     <title>Form Peminjaman</title>
+    <!-- Load Bootstrap CSS jika diperlukan -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"> 
+    <style>
+        .form-group {
+            margin-bottom: 20px;
+         }
+        .form-control {
+            width: 100%;
+        }
+         .btn {
+            margin-top: 10px;
+         }
+
+    </style>
 </head>
 <body>
-    <h2>Form Ubah Peminjaman</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Simpan</button>
-    </form>
+    <div class="container">
+        <h2>Form Peminjaman Admin</h2>
+        <form method="post">
+            {% csrf_token %}
+            <!-- Informasi Pengguna (User) -->
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" name="username" value="{{ form.instance.userid }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="judulbuku">Judul Buku:</label>
+                <input type="text" class="form-control" id="judulbuku" name="judulbuku" value="{{ form.instance.bukuid.judul }}" readonly>
+            </div>
+            <!-- Field-field formulir menggunakan elemen HTML5 -->                    
+            <div class="form-group">
+                <label for="tanggalpeminjaman">Tanggal Peminjaman:</label>
+                <input type="date" class="form-control" id="tanggalpeminjaman" name="tanggalpeminjaman" value="{{ form.instance.tanggalpeminjaman|date:'Y-m-d' }}">
+            </div>
+            <div class="form-group">
+                <label for="tanggalpengembalian">Tanggal Pengembalian:</label>
+                <input type="date" class="form-control" id="tanggalpengembalian" name="tanggalpengembalian" value="{{ form.instance.tanggalpengembalian|date:'Y-m-d' }}">
+            </div>            
+            <div class="form-group">
+                <label for="statuspeminjaman">Status Peminjaman:</label>
+                <select class="form-control" id="statuspeminjaman" name="statuspeminjaman">
+                    <option value="Dipinjam" {% if form.instance.statuspeminjaman == 'Dipinjam' %}selected{% endif %}>Dipinjam</option>
+                    <option value="Dikembalikan" {% if form.instance.statuspeminjaman == 'Dikembalikan' %}selected{% endif %}>Dikembalikan</option>
+                    <!-- Tambahkan pilihan status lainnya sesuai kebutuhan -->
+                </select>
+            </div>
+            <!-- Tombol submit -->
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </form>
+    </div>    
 </body>
 </html>

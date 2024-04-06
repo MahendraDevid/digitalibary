@@ -1,0 +1,94 @@
+{% extends 'layouts/base-admin.html' %}
+
+{% block title %} Tables {% endblock title %}
+
+{% block content %}
+
+  <div class="header bg-primary pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <h6 class="h2 text-white d-inline-block mb-0">Tables</h6>
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+              <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                <li class="breadcrumb-item"><a href="#">Ulasan Buku</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Daftar</li>
+              </ol>
+            </nav>
+          </div>
+          <div class="col-lg-6 col-5 text-right">
+            <a href="#" class="btn btn-sm btn-neutral">New</a>
+            <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page content -->
+  <div class="container-fluid mt--6">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+         <!-- Card header -->
+           <div class="card-header border-0">
+              <h3 class="mb-0">Daftar Ulasan User</h3>
+            </div>
+        <!-- Light table -->
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+                  <tr>
+                      <th scope="col" class="sort" data-sort="name">ID Ulasan</th>
+                      <th scope="col" class="sort" data-sort="budget">User</th>
+                      <th scope="col" class="sort" data-sort="budget">Buku</th>
+                      <th scope="col" class="sort" data-sort="budget">Ulasan</th>
+                      <th scope="col" class="sort" data-sort="budget">Rating</th>
+                      <th scope="col">Action</th>
+                  </tr>
+              </thead>
+              <tbody class="list">
+                  {% for ulasan in ulasan %}
+                  <tr>
+                      <td>{{ ulasan.pk }}</td>
+                      <td>{{ ulasan.userid.username }}</td>
+                      <td>{{ ulasan.bukuid.judul }}</td>
+                      <td>{{ ulasan.ulasan }}</td>
+                      <td>{{ ulasan.rating }}</td>
+                      <td>
+                          <a href="#" class="ni ni-fat-remove text-red" title="Hapus Ulasan" style="margin-right: 5px;" onclick="showDeleteConfirmationModal('{% url 'ulasanbuku:delete_admin' ulasan.pk %}')"></a>
+                          <a href="{% url 'ulasanbuku:update_admin' ulasan.pk %}" class="ni ni-fat-delete text-orange" title="Update Ulasan" style="margin-right: 5px;"></a>
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+        </div>
+    </div>
+
+        <!-- Modal -->
+      <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteConfirmationModalLabel">Konfirmasi Hapus</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Apakah Anda yakin ingin menghapus data ini?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+              <a id="deleteButton" href="#" class="btn btn-danger">Hapus</a>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}
